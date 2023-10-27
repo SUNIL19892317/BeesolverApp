@@ -1,11 +1,17 @@
-var builder = WebApplication.CreateBuilder(args);
+using MyApi;
+using MyApi.Register;
+using MyApi.Services;
 
-// Add services to the container.
+var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+//Dependency Injection
+var startup = new Startup(builder.Configuration);
+startup.ConfigureServices(builder.Services); // calling ConfigureServices method
+
 
 var app = builder.Build();
 

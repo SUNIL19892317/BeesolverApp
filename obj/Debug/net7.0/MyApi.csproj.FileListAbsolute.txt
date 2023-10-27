@@ -31,3 +31,7 @@ E:\MyPracticeDotnetCore\MicroArch\GitProject\MyApi\obj\Debug\net7.0\refint\MyApi
 E:\MyPracticeDotnetCore\MicroArch\GitProject\MyApi\obj\Debug\net7.0\MyApi.pdb
 E:\MyPracticeDotnetCore\MicroArch\GitProject\MyApi\obj\Debug\net7.0\MyApi.genruntimeconfig.cache
 E:\MyPracticeDotnetCore\MicroArch\GitProject\MyApi\obj\Debug\net7.0\ref\MyApi.dll
+E:\MyPracticeDotnetCore\MicroArch\GitProject\MyApi\bin\Debug\net7.0\Flurl.dll
+E:\MyPracticeDotnetCore\MicroArch\GitProject\MyApi\bin\Debug\net7.0\Flurl.Http.dll
+E:\MyPracticeDotnetCore\MicroArch\GitProject\MyApi\bin\Debug\net7.0\MtgApiManager.Lib.dll
+E:\MyPracticeDotnetCore\MicroArch\GitProject\MyApi\bin\Debug\net7.0\Newtonsoft.Json.dll

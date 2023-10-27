@@ -2,60 +2,44 @@ using Microsoft.AspNetCore.Mvc;
 using MtgApiManager.Lib.Core;
 using MtgApiManager.Lib.Model;
 using MtgApiManager.Lib.Service;
+using MyApi.Model;
+using MyApi.Services;
+
 namespace MyApi.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+//[Route("[controller]")]
+[Route("api/[controller]/[action]")]
 public class WeatherForecastController : ControllerBase
 {
-    private static readonly string[] Summaries = new[]
-    {
-        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-    };
-
     private readonly ILogger<WeatherForecastController> _logger;
+    private readonly ICardsService _cardsService;
 
-    public WeatherForecastController(ILogger<WeatherForecastController> logger)
+    public WeatherForecastController(ILogger<WeatherForecastController> logger, ICardsService cardsService)
     {
         _logger = logger;
-
+        _cardsService = cardsService;
     }
 
-    //[HttpGet(Name = "GetWeatherForecast")]
-    //public IEnumerable<WeatherForecast> Get()
-    //{
-    //    return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-    //    {
-    //        Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-    //        TemperatureC = Random.Shared.Next(-20, 55),
-    //        Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-    //    })
-    //    .ToArray();
-    //}
-
+    
     /// <summary>
-    /// Api to get the Card Details
+    /// API to get the Cards List
     /// </summary>
     /// <param name="Names"></param>
     /// <param name="Colors"></param>
     /// <param name="Types"></param>
     /// <returns></returns>
-    [Route("GetCardList")]
+    [Route("GetCardsList")]
     [HttpPost]
-    public async Task<IActionResult> GetCardList(string Names, string Colors, string Types)
+    public async Task<IActionResult> GetCardsList(string Names, string Colors, string Types)
     {
         try
         {
-            IMtgServiceProvider serviceProvider = new MtgServiceProvider();
-
-            ICardService service = serviceProvider.GetCardService();
-            //IOperationResult<List<ICard>> result1 = await service.AllAsync();
-
-            IOperationResult<List<ICard>> result = await service.Where(x => x.Name, Names)
-                      .Where(x => x.Colors, Colors)
-                      .Where(x => x.Types, Types)
-                      .AllAsync();
-
+            CardModel cardModel = new CardModel();
+            cardModel.Names = Names;
+            cardModel.Colors = Colors;
+            cardModel.Types = Types;
+            IOperationResult<List<ICard>> result = await _cardsService.GetCardsList(cardModel);
             if (result.IsSuccess)
             {
                 var value = result.Value;
