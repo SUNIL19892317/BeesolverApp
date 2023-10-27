@@ -42,13 +42,13 @@ public class WeatherForecastController : ControllerBase
             IOperationResult<List<ICard>> result = await _cardsService.GetCardsList(cardModel);
             if (result.IsSuccess)
             {
-                var value = result.Value;
+                return Ok(result.Value);
             }
             else
             {
-                var exception = result.Exception;
+                return Ok(result.Exception);
             }
-            return Ok(result);
+            
         }
         catch (Exception ex)
         {
